@@ -1,4 +1,4 @@
-.start-div {
+#start-div {
     text-align: center;
 }
 
@@ -15,4 +15,25 @@
     background-color: white;
     font-weight: bold;
     color: darkblue;
+}
+
+#answer-span {
+    color: gray;
+    border-style: solid;
+    /* border-top-width: 1px; */
+    border-width: 2px 0 0 0;
+    border-color: gray;
+    padding-top: 3px;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+#timer {
+    position: absolute; 
+    right: 5px;
+}
+
+#question-div, #input-div, #highscore-div {
+    display: none;
 }

@@ -48,6 +48,8 @@ var goBackBtn = document.querySelector('#go-back');
 var clearHighscoresBtn = document.querySelector('#clear-highscores');
 var timer = document.querySelector('#timer');
 var showHighscoresBtn = document.querySelector('#view-highscores');
+var answerDiv = document.querySelector('#answer-div');
+var answerSpan = document.querySelector('#answer-span');
 
 var count = 0;
 var score = 0;
@@ -97,13 +99,31 @@ function addQuestions(){
 
 function showNext(event) {
     var answer = event.target.textContent;
+    var answerTimerLeft = 8;
+    var answerMessage;
+    
     if (answer.includes(questions[count].answer)) {
         console.log("Correct");
+        answerMessage = "Correct";
         score += 5;
     } else {
         console.log("Wrong");
+        answerMessage = "Wrong";
         timeLeft -= 5;
     }
+
+    answerSpan.textContent = answerMessage;
+    answerSpan.setAttribute("style", "display: block");
+
+    var answerTimer = setInterval(function() {
+        if (answerTimerLeft > 0) {
+            answerTimerLeft--;
+        } else {
+            answerSpan.setAttribute("style", "display: none");
+            answerSpan.textContent = "";
+            clearInterval(answerTimer);
+        }
+    }, 100);
     
     count++;
 
@@ -111,7 +131,7 @@ function showNext(event) {
         addQuestions();
     } else {
         timer.textContent = '';
-        clearInterval(timeInterval)
+        clearInterval(timeInterval);
         showFinalScore();
     }
     
