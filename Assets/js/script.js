@@ -47,8 +47,7 @@ var initials = document.querySelector('#initials');
 var goBackBtn = document.querySelector('#go-back');
 var clearHighscoresBtn = document.querySelector('#clear-highscores');
 var timer = document.querySelector('#timer');
-
-
+var showHighscoresBtn = document.querySelector('#view-highscores');
 
 var count = 0;
 var score = 0;
@@ -59,21 +58,23 @@ function startQuiz(event) {
     event.preventDefault()
     
     // Hid initial container
+    showHighscoresBtn.disabled = true;
+    showHighscoresBtn.setAttribute("style", "display: none");
     startDiv.setAttribute('style', 'display: none');
     questionDiv.setAttribute('style', 'display: block');
 
-    addQuestions();
-
     timeInterval = setInterval(function () {
-    if (timeLeft >= 1) {
-        timer.textContent = "Time: " + timeLeft + "s";
-        timeLeft--;
-    } else {
-        timer.textContent = '';
-        clearInterval(timeInterval)
-        showFinalScore()
-    }
-    }, 1000);    
+        if (timeLeft >= 1) {
+            timer.textContent = "Time: " + timeLeft + "s";
+            timeLeft--;
+        } else {
+            timer.textContent = '';
+            clearInterval(timeInterval)
+            showFinalScore()
+        }
+    }, 1000);  
+
+    addQuestions(); 
 }
 
 function addQuestions(){
@@ -93,8 +94,6 @@ function addQuestions(){
         option.addEventListener("click", showNext);
     }
 }
-
-startForm.addEventListener("submit", startQuiz);
 
 function showNext(event) {
     var answer = event.target.textContent;
@@ -122,52 +121,55 @@ function showFinalScore() {
     startDiv.setAttribute('style', 'display: none');
     questionDiv.setAttribute('style', 'display: none');
     inputDiv.setAttribute('style', 'display: block');
+    highscoreDiv.setAttribute('style', 'display: none');
     inputDiv.children[1].textContent = "Your final score is " + score;
 }
 
 function showHighscores() {
+    if (initials.value.replace(/ /g, "") != "") {
+        viewHighscores();
 
-    if (JSON.parse(localStorage.getItem("users")) != null){
-        var users = JSON.parse(localStorage.getItem("users"));
-        users.push({
-            initial: initials.value,
-            score: score
-        });
+        if (JSON.parse(localStorage.getItem("users")) != null){
+            var users = JSON.parse(localStorage.getItem("users"));
+            users.push({
+                initial: initials.value.toUpperCase(),
+                score: score
+            });
+        } else {
+            var users = [{
+                initial: initials.value.toUpperCase(),
+                score: score
+            }]
+        }
+    
+        localStorage.setItem("users", JSON.stringify(users));
+    
+        removeAllChilds(highscoreList);
+    
+        for (var i = 0; i < users.length; i++) {
+            var li = document.createElement('li');
+            li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
+            li.setAttribute("style", 'list-style-type: none');
+            li.textContent = (i + 1) + '. '+ users[i].initial + " - " + users[i].score;
+            highscoreList.append(li);
+        }
     } else {
-        var users = [{
-            initial: initials.value,
-            score: score
-        }]
-    }
-
-    localStorage.setItem("users", JSON.stringify(users));
-        
-    inputDiv.setAttribute('style', 'display: none');
-    highscoreDiv.setAttribute('style', 'display: block');
-
-    removeAllChilds(highscoreList);
-
-    for (var i = 0; i < users.length; i++) {
-        var li = document.createElement('li');
-        li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
-        li.setAttribute("style", 'list-style-type: none');
-        li.textContent = (i + 1) + '. '+ users[i].initial + " - " + users[i].score;
-        highscoreList.append(li);
+        alert("Put your initials");
     }
 }
 
-submitInitialBtn.addEventListener("click", showHighscores);
-
 function goBack() {
-    count = 0;
-    score = 0;
-    timeLeft = 30;
-    initials.value = "";
-
+    showHighscoresBtn.disabled = false;
+    showHighscoresBtn.setAttribute("style", "display: inline-block");
     startDiv.setAttribute('style', 'display: block');
     questionDiv.setAttribute('style', 'display: none');
     inputDiv.setAttribute('style', 'display: none');
     highscoreDiv.setAttribute('style', 'display: none');
+
+    count = 0;
+    score = 0;
+    timeLeft = 30;
+    initials.value = "";
 }
 
 function clearHighscores() {
@@ -175,13 +177,23 @@ function clearHighscores() {
     removeAllChilds(highscoreList);
 }
 
-goBackBtn.addEventListener("click", goBack);
-
-clearHighscoresBtn.addEventListener("click", clearHighscores);
-
-
 function removeAllChilds(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
+
+function viewHighscores() {
+    showHighscoresBtn.disabled = true;
+    showHighscoresBtn.setAttribute("style", "display: none");
+    startDiv.setAttribute('style', 'display: none');
+    questionDiv.setAttribute('style', 'display: none');
+    inputDiv.setAttribute('style', 'display: none');
+    highscoreDiv.setAttribute('style', 'display: block');
+}
+
+startForm.addEventListener("submit", startQuiz);
+submitInitialBtn.addEventListener("click", showHighscores);
+goBackBtn.addEventListener("click", goBack);
+clearHighscoresBtn.addEventListener("click", clearHighscores);
+showHighscoresBtn.addEventListener("click", viewHighscores);
