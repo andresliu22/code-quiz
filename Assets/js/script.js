@@ -48,7 +48,6 @@ var goBackBtn = document.querySelector('#go-back');
 var clearHighscoresBtn = document.querySelector('#clear-highscores');
 var timer = document.querySelector('#timer');
 var showHighscoresBtn = document.querySelector('#view-highscores');
-var answerDiv = document.querySelector('#answer-div');
 var answerSpan = document.querySelector('#answer-span');
 
 var count = 0;
@@ -65,6 +64,7 @@ function startQuiz(event) {
     startDiv.setAttribute('style', 'display: none');
     questionDiv.setAttribute('style', 'display: block');
 
+    // Start timer
     timeInterval = setInterval(function () {
         if (timeLeft >= 1) {
             timer.textContent = "Time: " + timeLeft + "s";
@@ -79,6 +79,7 @@ function startQuiz(event) {
     addQuestions(); 
 }
 
+// Add the questions
 function addQuestions(){
     removeAllChilds(optionList);
     question.textContent = questions[count].question;
@@ -97,6 +98,7 @@ function addQuestions(){
     }
 }
 
+// Show next question and apply message and update score or time left
 function showNext(event) {
     var answer = event.target.textContent;
     var answerTimerLeft = 8;
@@ -137,14 +139,16 @@ function showNext(event) {
     
 };
 
+// Show final score after time ends or answers all the questions
 function showFinalScore() {
     startDiv.setAttribute('style', 'display: none');
     questionDiv.setAttribute('style', 'display: none');
     inputDiv.setAttribute('style', 'display: block');
     highscoreDiv.setAttribute('style', 'display: none');
-    inputDiv.children[1].textContent = "Your final score is " + score;
+    inputDiv.children[1].textContent = "Your final score is " + score + ".";
 }
 
+// Show all the highscores after putting initials and pressing submit
 function showHighscores() {
     if (initials.value.replace(/ /g, "") != "") {
         viewHighscores();
@@ -161,7 +165,9 @@ function showHighscores() {
                 score: score
             }]
         }
-    
+        
+        users.sort((a, b) => a.score <= b.score && 1 || -1);
+
         localStorage.setItem("users", JSON.stringify(users));
     
         removeAllChilds(highscoreList);
@@ -178,6 +184,7 @@ function showHighscores() {
     }
 }
 
+// Go back to start the quiz again
 function goBack() {
     showHighscoresBtn.disabled = false;
     showHighscoresBtn.setAttribute("style", "display: inline-block");
@@ -192,17 +199,20 @@ function goBack() {
     initials.value = "";
 }
 
+// Clear past highscores
 function clearHighscores() {
     localStorage.removeItem("users");
     removeAllChilds(highscoreList);
 }
 
+// Remove all childs from an parent element
 function removeAllChilds(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
 
+// View highscores after pressing the respective button
 function viewHighscores() {
     showHighscoresBtn.disabled = true;
     showHighscoresBtn.setAttribute("style", "display: none");
@@ -212,6 +222,7 @@ function viewHighscores() {
     highscoreDiv.setAttribute('style', 'display: block');
 }
 
+// Event Listeners
 startForm.addEventListener("submit", startQuiz);
 submitInitialBtn.addEventListener("click", showHighscores);
 goBackBtn.addEventListener("click", goBack);
