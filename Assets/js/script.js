@@ -38,7 +38,11 @@ var startForm = document.querySelector('#start-form');
 var startDiv = document.querySelector('#start-div');
 var optionList = document.querySelector('#option-list');
 var question = document.querySelector('#question');
-var questionDiv= document.querySelector('#question-div');
+var questionDiv = document.querySelector('#question-div');
+var inputDiv = document.querySelector('#input-div');
+var scoreboardDiv = document.querySelector('#scoreboard-div');
+var submitInitial = document.querySelector('#submit-initial');
+
 
 var count = 0;
 var score = 0;
@@ -49,6 +53,7 @@ function startQuiz(event) {
     console.log(count)
     // Hid initial container
     startDiv.setAttribute('style', 'display: none');
+    questionDiv.setAttribute('style', 'display: block');
 
     removeAllChilds(optionList)
 
@@ -100,6 +105,8 @@ function showNext(event) {
 };
 
 function showFinalScore() {
-    startDiv.css('display', 'none');
-    questionDiv.css('display', 'none');
+    startDiv.setAttribute('style', 'display: none');
+    questionDiv.setAttribute('style', 'display: none');
+    inputDiv.setAttribute('style', 'display: block');
+    inputDiv.children[1].textContent = "Your final score is " + score;
 }

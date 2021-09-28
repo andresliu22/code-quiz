@@ -21,9 +21,25 @@
             </form>
         </div>
 
-        <div class="container" id="question-div">
+        <div class="container" id="question-div" style="display:none;">
             <h2 id="question"></h2>
             <ul id="option-list"></ul>
+        </div>
+
+        <div class="container" id="input-div" style="display:none;">
+            <h2>All Done!</h2>
+            <h4>Your Final Score is </h4>
+            <label for="initials">Enter initials: </label>
+                <input id="initials" type="text" placeholder="ABC">
+            </label>
+            <button class="btn btn-secondary">Submit</button>
+        </div>
+
+        <div class="container" id="scoreboard-div" style="display:none;">
+            <h2>Highscores!</h2>
+            <ul></ul>
+            <button class="btn btn-secondary">Go back</button>
+            <button class="btn btn-secondary">Clear Highscores</button>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
