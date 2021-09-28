@@ -4,7 +4,7 @@ Challenge yourself and your friends on this coding quiz and test your knowledge 
 
 ## Site Picture
 
-![Site](./Assets/images/site-picture.png)
+![Site](./Assets/images/site-picture.PNG)
 
 ## Getting Started
 
