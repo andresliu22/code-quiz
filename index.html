@@ -11,6 +11,7 @@
 <body>
     <header>
         <button class="view-highscores btn btn-danger" id="view-highscores" name="view-highscores">View Highscores</button>
+        <span id="timer" style="position: absolute; right: 0;"></span>
     </header>
     <main id="main">
         <div class="start-div container" id="start-div">
@@ -38,8 +39,8 @@
         <div class="container" id="highscore-div" style="display:none;">
             <h2>Highscores!</h2>
             <ul id="highscore-list"></ul>
-            <button class="btn btn-secondary">Go back</button>
-            <button class="btn btn-secondary">Clear Highscores</button>
+            <button class="btn btn-secondary" id="go-back">Go back</button>
+            <button class="btn btn-secondary" id="clear-highscores">Clear Highscores</button>
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

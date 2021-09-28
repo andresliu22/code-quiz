@@ -41,28 +41,45 @@ var question = document.querySelector('#question');
 var questionDiv = document.querySelector('#question-div');
 var inputDiv = document.querySelector('#input-div');
 var highscoreDiv = document.querySelector('#highscore-div');
-var submitInitial = document.querySelector('#submit-initial');
+var submitInitialBtn = document.querySelector('#submit-initial');
 var highscoreList = document.querySelector('#highscore-list');
 var initials = document.querySelector('#initials');
+var goBackBtn = document.querySelector('#go-back');
+var clearHighscoresBtn = document.querySelector('#clear-highscores');
+var timer = document.querySelector('#timer');
 
 
 
 var count = 0;
 var score = 0;
-var time = 30;
+var timeLeft = 30;
+var timeInterval;
 
 function startQuiz(event) {
     event.preventDefault()
-    console.log(count)
+    
     // Hid initial container
     startDiv.setAttribute('style', 'display: none');
     questionDiv.setAttribute('style', 'display: block');
 
-    removeAllChilds(optionList)
+    addQuestions();
 
+    timeInterval = setInterval(function () {
+    if (timeLeft >= 1) {
+        timer.textContent = "Time: " + timeLeft + "s";
+        timeLeft--;
+    } else {
+        timer.textContent = '';
+        clearInterval(timeInterval)
+        showFinalScore()
+    }
+    }, 1000);    
+}
+
+function addQuestions(){
+    removeAllChilds(optionList);
     question.textContent = questions[count].question;
     
-
     for (var i = 0; i < questions[count].options.length ; i++) {
         var li = document.createElement('li');
         li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
@@ -73,19 +90,11 @@ function startQuiz(event) {
         option.textContent = (i + 1) + '. '+ questions[count].options[i];
         li.append(option);
         optionList.append(li);
-
         option.addEventListener("click", showNext);
     }
-    
 }
 
 startForm.addEventListener("submit", startQuiz);
-
-function removeAllChilds(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
 
 function showNext(event) {
     var answer = event.target.textContent;
@@ -94,15 +103,17 @@ function showNext(event) {
         score += 5;
     } else {
         console.log("Wrong");
-        time -= 5;
+        timeLeft -= 5;
     }
     
     count++;
 
     if (questions.length > count) {
-        startQuiz(event);
+        addQuestions();
     } else {
-        showFinalScore()
+        timer.textContent = '';
+        clearInterval(timeInterval)
+        showFinalScore();
     }
     
 };
@@ -112,7 +123,6 @@ function showFinalScore() {
     questionDiv.setAttribute('style', 'display: none');
     inputDiv.setAttribute('style', 'display: block');
     inputDiv.children[1].textContent = "Your final score is " + score;
-    console.log(JSON.parse(localStorage.getItem("users")));
 }
 
 function showHighscores() {
@@ -135,6 +145,8 @@ function showHighscores() {
     inputDiv.setAttribute('style', 'display: none');
     highscoreDiv.setAttribute('style', 'display: block');
 
+    removeAllChilds(highscoreList);
+
     for (var i = 0; i < users.length; i++) {
         var li = document.createElement('li');
         li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
@@ -142,10 +154,34 @@ function showHighscores() {
         li.textContent = (i + 1) + '. '+ users[i].initial + " - " + users[i].score;
         highscoreList.append(li);
     }
-
 }
 
-submitInitial.addEventListener("click", showHighscores);
+submitInitialBtn.addEventListener("click", showHighscores);
+
+function goBack() {
+    count = 0;
+    score = 0;
+    timeLeft = 30;
+    initials.value = "";
+
+    startDiv.setAttribute('style', 'display: block');
+    questionDiv.setAttribute('style', 'display: none');
+    inputDiv.setAttribute('style', 'display: none');
+    highscoreDiv.setAttribute('style', 'display: none');
+}
+
+function clearHighscores() {
+    localStorage.removeItem("users");
+    removeAllChilds(highscoreList);
+}
+
+goBackBtn.addEventListener("click", goBack);
+
+clearHighscoresBtn.addEventListener("click", clearHighscores);
 
 
-
+function removeAllChilds(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
