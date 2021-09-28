@@ -2,3 +2,10 @@
     margin-top: 40px;
     text-align: center;
 }
+
+.view-highscores {
+    border-width: 0;
+    background-color: white;
+    font-weight: bold;
+    color: darkblue;
+}
