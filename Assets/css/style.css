@@ -13,6 +13,7 @@
 .view-highscores {
     border-width: 0;
     background-color: white;
+    font-size: 18px;
     font-weight: bold;
     color: darkblue;
 }
