@@ -20,8 +20,7 @@
 #answer-span {
     color: gray;
     border-style: solid;
-    /* border-top-width: 1px; */
-    border-width: 2px 0 0 0;
+    border-width: 3px 0 0 0;
     border-color: gray;
     padding-top: 3px;
     font-style: italic;

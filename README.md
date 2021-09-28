@@ -1,89 +1,56 @@
-# 04 Web APIs: Code Quiz
+# Coding Quiz
 
-## Your Task
+Challenge yourself and your friends on this coding quiz and test your knowledge about web development.
 
-At some point in your journey to become a full-stack web developer, you’ll likely be asked to complete a coding assessment&mdash;perhaps as part of an interview process. A typical coding assessment includes both multiple-choice questions and interactive coding challenges. 
+## Site Picture
 
-To help familiarize you with these tests and allow you to use the skills covered in this unit, this week’s homework invites you to build a timed coding quiz with multiple-choice questions. This app will run in the browser and will feature dynamically updated HTML and CSS powered by JavaScript code that you write. It will have a clean, polished, and responsive user interface. 
+![Site](./Assets/images/site-picture.png)
 
-This week’s coursework will equip you with all the skills you need to succeed in this assignment.
+## Getting Started
 
-## User Story
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-```
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
-```
+* Click on the green button named Code on github and copy the URL of the repository.
+* Use the command git clone (repository's URL) to clone all existing project on your local machine.
+* Start your testing with your own clone of the repository using your preferred code editor.
 
-## Acceptance Criteria
+## Prerequisites
 
-```
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and my score
-```
+* Git
 
-## Mock-Up
+## Installing
 
-The following animation demonstrates the application functionality:
+* Fork the project to get your own copy of the repository.
+* Clone the repository.
+* Make your changes and testing.
+* Deploy on github by going to the repository and on settings in the pages tab save the source to main for deployment and demo.
 
-![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./Assets/04-web-apis-homework-demo.gif)
+## Built With
 
-## Grading Requirements
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [Javascript](https://developer.mozilla.org/en-US/docs/Web/javascript)
 
-This homework is graded based on the following criteria: 
+## Deployed Link
 
-### Technical Acceptance Criteria: 40%
+* [See Live Site](https://andresliu22.github.io/code-quiz/)
 
-* Satisfies all of the preceding acceptance criteria.
+## Authors
 
-### Deployment: 32%
+* **Andres Liu** 
 
-* Application deployed at live URL.
+## Contacts
 
-* Application loads with no errors.
+- [Link to Portfolio Site](https://andresliu22.github.io/portfolio/)
+- [Link to Github](https://github.com/andresliu22/)
+- [Link to LinkedIn](https://www.linkedin.com/in/andresliu22/)
 
-* Application GitHub URL submitted.
+## License
 
-* GitHub repository contains application code.
+This project is licensed under the MIT License.
 
-### Application Quality: 15%
+## Acknowledgments
 
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the homework instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
-
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+* Always do some research to get the best possible way to code anything.
+* Make the website and code easy to read for viewers and other developers by using brief comments.
+* Be use to commit to get an insight of what you have done for each progress you make.
