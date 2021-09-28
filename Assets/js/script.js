@@ -40,8 +40,11 @@ var optionList = document.querySelector('#option-list');
 var question = document.querySelector('#question');
 var questionDiv = document.querySelector('#question-div');
 var inputDiv = document.querySelector('#input-div');
-var scoreboardDiv = document.querySelector('#scoreboard-div');
+var highscoreDiv = document.querySelector('#highscore-div');
 var submitInitial = document.querySelector('#submit-initial');
+var highscoreList = document.querySelector('#highscore-list');
+var initials = document.querySelector('#initials');
+
 
 
 var count = 0;
@@ -109,4 +112,40 @@ function showFinalScore() {
     questionDiv.setAttribute('style', 'display: none');
     inputDiv.setAttribute('style', 'display: block');
     inputDiv.children[1].textContent = "Your final score is " + score;
+    console.log(JSON.parse(localStorage.getItem("users")));
 }
+
+function showHighscores() {
+
+    if (JSON.parse(localStorage.getItem("users")) != null){
+        var users = JSON.parse(localStorage.getItem("users"));
+        users.push({
+            initial: initials.value,
+            score: score
+        });
+    } else {
+        var users = [{
+            initial: initials.value,
+            score: score
+        }]
+    }
+
+    localStorage.setItem("users", JSON.stringify(users));
+        
+    inputDiv.setAttribute('style', 'display: none');
+    highscoreDiv.setAttribute('style', 'display: block');
+
+    for (var i = 0; i < users.length; i++) {
+        var li = document.createElement('li');
+        li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
+        li.setAttribute("style", 'list-style-type: none');
+        li.textContent = (i + 1) + '. '+ users[i].initial + " - " + users[i].score;
+        highscoreList.append(li);
+    }
+
+}
+
+submitInitial.addEventListener("click", showHighscores);
+
+
+
