@@ -83,7 +83,7 @@ function addQuestions(){
     
     for (var i = 0; i < questions[count].options.length ; i++) {
         var li = document.createElement('li');
-        li.className = "flex-row justify-space-between align-center p-2 bg-light text-dark";
+        li.className = "p-2";
         li.setAttribute("style", 'list-style-type: none');
         var option = document.createElement('option');
         option.className = 'btn btn-primary submit-answer';
